@@ -73,7 +73,7 @@ function getProjectBySlug(projectSlug: string | null): ProjectItem {
 
 function AppBackground() {
   return (
-    <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_10%_0%,rgba(157,255,0,0.08),transparent_30%),radial-gradient(circle_at_90%_98%,rgba(34,197,94,0.12),transparent_38%),linear-gradient(180deg,#06080d_0%,#030407_100%)]" />
+    <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_8%_4%,rgba(132,204,22,0.32),transparent_26%),radial-gradient(circle_at_92%_96%,rgba(34,197,94,0.30),transparent_32%),linear-gradient(180deg,#05070b_0%,#020403_100%)]" />
   )
 }
 
