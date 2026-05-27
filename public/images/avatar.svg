@@ -1,0 +1,16 @@
+<svg width="800" height="960" viewBox="0 0 800 960" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="90" y1="20" x2="760" y2="960" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#9AE600"/>
+      <stop offset="0.45" stop-color="#1A7F5A"/>
+      <stop offset="1" stop-color="#0A0D13"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="960" fill="url(#bg)"/>
+  <circle cx="400" cy="320" r="155" fill="#E8E9ED" fill-opacity="0.9"/>
+  <rect x="250" y="470" width="300" height="280" rx="140" fill="#D4D7DE" fill-opacity="0.88"/>
+  <circle cx="338" cy="300" r="16" fill="#121826"/>
+  <circle cx="462" cy="300" r="16" fill="#121826"/>
+  <path d="M330 365C356 388 443 388 470 365" stroke="#121826" stroke-width="18" stroke-linecap="round"/>
+  <text x="400" y="860" text-anchor="middle" fill="#F6F7F8" font-family="Segoe UI, sans-serif" font-size="42" font-weight="600" letter-spacing="2">YOUR AVATAR</text>
+</svg>

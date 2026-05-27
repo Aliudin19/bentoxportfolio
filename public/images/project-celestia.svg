@@ -1,0 +1,14 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="760" rx="32" fill="#0A0D14"/>
+  <rect x="40" y="40" width="1120" height="680" rx="24" fill="url(#g1)"/>
+  <defs>
+    <linearGradient id="g1" x1="40" y1="40" x2="1040" y2="740" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#B8C2FF"/>
+      <stop offset="0.48" stop-color="#787EFD"/>
+      <stop offset="1" stop-color="#242A40"/>
+    </linearGradient>
+  </defs>
+  <text x="100" y="170" fill="#FFFFFF" font-size="88" font-family="Segoe UI, sans-serif" font-weight="700">Celestia</text>
+  <text x="100" y="235" fill="#F4F4F5" font-size="32" font-family="Segoe UI, sans-serif">Landing page concept</text>
+  <rect x="100" y="300" width="1000" height="330" rx="20" fill="#FFFFFF" fill-opacity="0.2"/>
+</svg>

@@ -1,0 +1,14 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="760" rx="32" fill="#0A0D14"/>
+  <rect x="40" y="40" width="1120" height="680" rx="24" fill="url(#g2)"/>
+  <defs>
+    <linearGradient id="g2" x1="120" y1="80" x2="1110" y2="680" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFDAB5"/>
+      <stop offset="0.4" stop-color="#9AA7FF"/>
+      <stop offset="1" stop-color="#3A4465"/>
+    </linearGradient>
+  </defs>
+  <text x="110" y="170" fill="#FFFFFF" font-size="84" font-family="Segoe UI, sans-serif" font-weight="700">Kitsilano</text>
+  <text x="110" y="230" fill="#FFFFFF" font-size="30" font-family="Segoe UI, sans-serif">Real estate showcase</text>
+  <rect x="110" y="290" width="980" height="350" rx="18" fill="#09090B" fill-opacity="0.34"/>
+</svg>
