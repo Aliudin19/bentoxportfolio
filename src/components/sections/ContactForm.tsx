@@ -101,18 +101,19 @@ export function ContactForm() {
 
   return (
     <section className="flex h-full flex-col gap-4">
-      <h2 className="font-display text-3xl font-semibold uppercase tracking-tight text-white sm:text-4xl">
+      <h2 className="font-display text-3xl font-semibold uppercase tracking-tight text-lavender-blush sm:text-4xl">
         Contact
       </h2>
       <form className="space-y-3" onSubmit={onSubmit} noValidate>
         <label className="block">
-          <span className="mb-1 block text-sm text-zinc-300">Name</span>
+          <span className="mb-1 block text-sm text-lavender-blush/75">Name</span>
           <input
             type="text"
             value={form.name}
             onChange={(event) => setForm((prev) => ({ ...prev, name: event.target.value }))}
-            className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-zinc-100 placeholder:text-zinc-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-300/80"
+            className="w-full rounded-xl border border-lavender-blush/10 bg-lavender-blush/[0.05] px-4 py-2.5 text-sm text-lavender-blush placeholder:text-lavender-blush/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-celadon/80"
             placeholder="Your name"
+            autoComplete="name"
             aria-invalid={Boolean(errors.name)}
             aria-describedby={errors.name ? 'name-error' : undefined}
           />
@@ -124,13 +125,14 @@ export function ContactForm() {
         </label>
 
         <label className="block">
-          <span className="mb-1 block text-sm text-zinc-300">Email</span>
+          <span className="mb-1 block text-sm text-lavender-blush/75">Email</span>
           <input
             type="email"
             value={form.email}
             onChange={(event) => setForm((prev) => ({ ...prev, email: event.target.value }))}
-            className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-zinc-100 placeholder:text-zinc-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-300/80"
+            className="w-full rounded-xl border border-lavender-blush/10 bg-lavender-blush/[0.05] px-4 py-2.5 text-sm text-lavender-blush placeholder:text-lavender-blush/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-celadon/80"
             placeholder="you@email.com"
+            autoComplete="email"
             aria-invalid={Boolean(errors.email)}
             aria-describedby={errors.email ? 'email-error' : undefined}
           />
@@ -142,11 +144,11 @@ export function ContactForm() {
         </label>
 
         <label className="block">
-          <span className="mb-1 block text-sm text-zinc-300">Message</span>
+          <span className="mb-1 block text-sm text-lavender-blush/75">Message</span>
           <textarea
             value={form.message}
             onChange={(event) => setForm((prev) => ({ ...prev, message: event.target.value }))}
-            className="min-h-28 w-full rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-zinc-100 placeholder:text-zinc-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-300/80"
+            className="min-h-28 w-full rounded-xl border border-lavender-blush/10 bg-lavender-blush/[0.05] px-4 py-2.5 text-sm text-lavender-blush placeholder:text-lavender-blush/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-celadon/80"
             placeholder="Tell me about your project goals..."
             aria-invalid={Boolean(errors.message)}
             aria-describedby={errors.message ? 'message-error' : undefined}
@@ -161,13 +163,14 @@ export function ContactForm() {
         <button
           type="submit"
           disabled={status === 'loading'}
-          className="mt-2 inline-flex w-full items-center justify-center rounded-xl border border-zinc-100 bg-zinc-100 px-4 py-2.5 text-sm font-semibold text-zinc-950 transition hover:bg-white disabled:cursor-not-allowed disabled:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-300/80"
+          aria-busy={status === 'loading'}
+          className="mt-2 inline-flex w-full items-center justify-center rounded-xl border border-celadon bg-celadon px-4 py-2.5 text-sm font-semibold text-charcoal transition hover:border-lavender-blush hover:bg-lavender-blush disabled:cursor-not-allowed disabled:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-celadon/80"
         >
           {submitLabel}
         </button>
       </form>
 
-      <p className="min-h-6 text-xs text-zinc-300" role="status" aria-live="polite">
+      <p className="min-h-6 text-xs text-lavender-blush/75" role="status" aria-live="polite">
         {feedback}
       </p>
     </section>

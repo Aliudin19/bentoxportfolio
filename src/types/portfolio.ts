@@ -35,6 +35,9 @@ export interface ProjectItem {
   stack: string[]
   description: string
   summary: string
+  impact: string
+  focus: string[]
+  metric: string
   role: string
   year: string
   featured: boolean

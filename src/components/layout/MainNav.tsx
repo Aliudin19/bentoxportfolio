@@ -13,18 +13,18 @@ export function MainNav({ brand, items }: MainNavProps) {
 
   return (
     <header className="sticky top-3 z-30 sm:static">
-      <div className="relative z-20 rounded-2xl border border-white/10 bg-black/85 px-3 py-3 shadow-[0_14px_30px_rgba(0,0,0,0.35)] backdrop-blur sm:px-5 sm:py-4">
+      <div className="relative z-20 rounded-2xl border border-lavender-blush/10 bg-charcoal/90 px-3 py-3 shadow-[0_14px_30px_rgba(23,27,31,0.35)] backdrop-blur sm:px-5 sm:py-4">
         <nav className="flex items-center justify-between gap-3">
           <a
             href="#top"
-            className="font-display text-lg font-semibold uppercase tracking-wide text-white sm:text-xl"
+            className="font-display text-lg font-semibold uppercase tracking-wide text-lavender-blush sm:text-xl"
             onClick={() => setMenuOpen(false)}
           >
             {brand}
           </a>
           <button
             type="button"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-white/[0.03] text-zinc-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-300/80 sm:hidden"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-lavender-blush/10 bg-lavender-blush/[0.04] text-lavender-blush focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-celadon/80 sm:hidden"
             aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
             aria-expanded={isMenuOpen}
             aria-controls={menuId}
@@ -48,7 +48,7 @@ export function MainNav({ brand, items }: MainNavProps) {
               <li key={item.id}>
                 <a
                   href={`#${item.id}`}
-                  className="rounded-lg px-3 py-2 text-sm font-medium uppercase tracking-[0.12em] text-zinc-300 transition hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-300/80"
+                  className="rounded-lg px-3 py-2 text-sm font-medium uppercase tracking-[0.12em] text-lavender-blush/75 transition hover:bg-celadon/15 hover:text-lavender-blush focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-celadon/80"
                 >
                   {item.label}
                 </a>
@@ -60,7 +60,7 @@ export function MainNav({ brand, items }: MainNavProps) {
 
       <div
         id={menuId}
-        className={`absolute left-0 right-0 top-[calc(100%+0.5rem)] z-10 rounded-2xl border border-white/10 bg-black/95 px-6 py-6 shadow-[0_18px_40px_rgba(0,0,0,0.55)] backdrop-blur transition duration-300 ease-out sm:hidden ${
+        className={`absolute left-0 right-0 top-[calc(100%+0.5rem)] z-10 rounded-2xl border border-lavender-blush/10 bg-charcoal/95 px-6 py-6 shadow-[0_18px_40px_rgba(23,27,31,0.45)] backdrop-blur transition duration-300 ease-out sm:hidden ${
           isMenuOpen
             ? 'pointer-events-auto translate-y-0 opacity-100'
             : 'pointer-events-none -translate-y-3 opacity-0'
@@ -75,7 +75,7 @@ export function MainNav({ brand, items }: MainNavProps) {
               <li key={item.id}>
                 <a
                   href={`#${item.id}`}
-                  className="block font-display text-3xl font-semibold uppercase leading-none tracking-tight text-zinc-100 transition hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-300/80"
+                  className="block font-display text-3xl font-semibold uppercase leading-none tracking-tight text-lavender-blush transition hover:text-celadon focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-celadon/80"
                   onClick={() => setMenuOpen(false)}
                 >
                   {item.label}

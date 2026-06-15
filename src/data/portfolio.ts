@@ -30,14 +30,14 @@ export const experiences: ExperienceItem[] = [
     role: 'Full-stack Developer',
     company: 'Pelita Teknologi Global',
     period: 'Aug 2025 - Present',
-    location: 'jakarta',
+    location: 'Jakarta',
     highlights:
-      'Building a B2B SaaS platform for supply chain management, responsible for both front-end and back-end development using angular, spring boot, and PostgreSQL.',
+      'Building a B2B SaaS platform for supply chain management, responsible for both front-end and back-end development using Angular, Spring Boot, and PostgreSQL.',
   },
   {
     role: 'Front-End Developer',
     company: 'Pelita Teknologi Global',
-    period: 'Jun 2024 - jun 2025',
+    period: 'Jun 2024 - Jun 2025',
     location: 'Jakarta',
     highlights:
       'Translated product requirements into high-fidelity prototypes and implemented polished UI implementations, with a focus on conversion and usability.',
@@ -68,7 +68,6 @@ export const expertise: ExpertiseItem[] = [
     description:
       'Experienced in manual and automated testing methodologies, ensuring software quality and reliability through comprehensive test plans and execution.',
   },
-  
 ]
 
 export const projects: ProjectItem[] = [
@@ -80,10 +79,13 @@ export const projects: ProjectItem[] = [
     link: 'https://example.com/celestia',
     category: 'Learning System',
     tags: ['Curriculum', 'Lecture Notes', 'PostgreSQL', 'Learning Management'],
-    stack: ['Vue', 'Tailwind CSS', 'spring boot', 'PostgreSQL', 'sonarQube'],
+    stack: ['Vue', 'Tailwind CSS', 'Spring Boot', 'PostgreSQL', 'SonarQube'],
     description: 'A comprehensive LMS platform for corporate training and development.',
     summary:
       'A full-featured learning management system designed to facilitate corporate training and development, with a focus on user engagement, content management, and performance tracking.',
+    impact: 'Simplified course delivery, assignment flow, and learning material access for internal training teams.',
+    focus: ['Course structure', 'Assignment workflow', 'Admin reporting'],
+    metric: 'End-to-end learning workflow',
     role: 'UI design, front-end development, and back-end API implementation.',
     year: '2026',
     featured: true,
@@ -94,12 +96,15 @@ export const projects: ProjectItem[] = [
     thumbnail: '/images/konectgo-capture.png',
     heroImage: '/images/konectgo-capture.png',
     link: 'https://example.com/konectgo',
-    category: 'Esim, simcard services',
-    tags: ['Simcard', 'Esim', 'Quota roaming',],
-    stack: ['React', 'go fiber', 'Responsive Layout', 'Editorial UI'],
-    description: 'Platform for esim and simcard services, seamless and user-friendly.',
+    category: 'eSIM & Simcard Services',
+    tags: ['Simcard', 'eSIM', 'Quota Roaming'],
+    stack: ['React', 'Go Fiber', 'Responsive Layout', 'Editorial UI'],
+    description: 'Platform for eSIM and simcard services, seamless and user-friendly.',
     summary:
       'A dynamic platform for esim and simcard services, featuring a user-friendly design and seamless interactions to enhance customer experience and drive engagement.',
+    impact: 'Created a clearer purchase journey for roaming quota, simcard, and eSIM service discovery.',
+    focus: ['Catalog browsing', 'Checkout clarity', 'Service management'],
+    metric: 'Mobile-first telecom flow',
     role: 'Back-end development, front-end implementation, and product management.',
     year: '2025',
     featured: true,

@@ -5,6 +5,11 @@
   --font-sans: 'Manrope', 'Segoe UI', sans-serif;
   --font-display: 'Sora', 'Segoe UI', sans-serif;
   --font-signature: 'Mr Dafoe', 'Brush Script MT', cursive;
+  --color-charcoal: #454851;
+  --color-sage: #73956f;
+  --color-muted-teal: #7bae7f;
+  --color-celadon: #95d7ae;
+  --color-lavender-blush: #fceff9;
 }
 
 :root {
@@ -20,8 +25,8 @@ body {
   margin: 0;
   min-height: 100vh;
   font-family: var(--font-sans);
-  background: #05070b;
-  color: #e4e4e7;
+  background: #454851;
+  color: #fceff9;
   overflow-x: hidden;
 }
 
@@ -43,7 +48,7 @@ button {
 
 .experience-scroll {
   scrollbar-width: thin;
-  scrollbar-color: #8eea35 #1a1f2b;
+  scrollbar-color: #95d7ae rgba(69, 72, 81, 0.72);
   scrollbar-gutter: stable;
 }
 
@@ -52,18 +57,18 @@ button {
 }
 
 .experience-scroll::-webkit-scrollbar-track {
-  background: #1a1f2b;
+  background: rgba(69, 72, 81, 0.72);
   border-radius: 999px;
 }
 
 .experience-scroll::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #a3e635 0%, #65a30d 100%);
+  background: linear-gradient(180deg, #95d7ae 0%, #7bae7f 100%);
   border-radius: 999px;
-  border: 1px solid #1a1f2b;
+  border: 1px solid rgba(69, 72, 81, 0.8);
 }
 
 .experience-scroll::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #bef264 0%, #84cc16 100%);
+  background: linear-gradient(180deg, #fceff9 0%, #95d7ae 100%);
 }
 
 .social-btn {
@@ -73,9 +78,9 @@ button {
   align-items: center;
   justify-content: center;
   border-radius: 0.75rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.03);
-  color: #e4e4e7;
+  border: 1px solid rgba(252, 239, 249, 0.12);
+  background: rgba(252, 239, 249, 0.04);
+  color: #fceff9;
   transition:
     transform 220ms ease,
     border-color 220ms ease,
@@ -90,7 +95,7 @@ button {
 
 .social-btn:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px rgba(163, 230, 53, 0.8);
+  box-shadow: 0 0 0 2px rgba(149, 215, 174, 0.82);
 }
 
 .social-btn--github:hover {
@@ -156,26 +161,6 @@ button {
   }
 }
 
-.reveal {
-  opacity: 0;
-  filter: blur(10px);
-  transform: translate3d(var(--reveal-x, 0), var(--reveal-y, 32px), 0) scale(0.96);
-  transform-origin: center;
-  transition:
-    opacity 760ms cubic-bezier(0.16, 1, 0.3, 1),
-    filter 760ms cubic-bezier(0.16, 1, 0.3, 1),
-    transform 760ms cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, filter, transform;
-}
-
-.reveal-visible {
-  opacity: 1;
-  filter: blur(0);
-  transform: translate3d(0, 0, 0) scale(1);
-  will-change: auto;
-}
-
-.reveal,
 .bento-showcase > *,
 .bento-middle > * {
   min-width: 0;
@@ -254,43 +239,9 @@ button {
   grid-area: contact;
 }
 
-.hero-name,
-.featured-title,
-.featured-card-1,
-.mid-motivation {
-  --reveal-x: -28px;
-  --reveal-y: 18px;
-}
-
-.hero-photo,
-.hero-mail,
-.featured-card-2,
-.mid-contact {
-  --reveal-x: 0;
-  --reveal-y: 34px;
-}
-
-.hero-exp,
-.featured-more,
-.mid-expertise {
-  --reveal-x: 28px;
-  --reveal-y: 18px;
-}
-
-.hero-about,
-.mid-toolbox {
-  --reveal-x: 0;
-  --reveal-y: 26px;
-}
-
 @media (max-width: 1023px) {
   .bento-showcase {
     gap: 10px;
-  }
-
-  .reveal {
-    --reveal-x: 0;
-    --reveal-y: 26px;
   }
 
   .bento-hero {
@@ -333,13 +284,6 @@ button {
     padding-right: 0;
   }
 
-  .bento-middle {
-    grid-template-areas:
-      'toolbox'
-      'motivation'
-      'expertise'
-      'contact';
-  }
 }
 
 @media (max-width: 640px) {
@@ -449,11 +393,4 @@ button {
     animation: none;
   }
 
-  .reveal,
-  .reveal-visible {
-    opacity: 1;
-    filter: none;
-    transform: none;
-    transition: none;
-  }
 }

@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import type { MouseEvent as ReactMouseEvent } from 'react'
+import { motion, useReducedMotion, useScroll, useSpring } from 'motion/react'
 
 import { ContactForm } from '../components/sections/ContactForm'
 import { ExperienceList } from '../components/sections/ExperienceList'
@@ -72,8 +73,46 @@ function getProjectBySlug(projectSlug: string | null): ProjectItem {
 }
 
 function AppBackground() {
+  const reduceMotion = useReducedMotion()
+
   return (
-    <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_8%_4%,rgba(132,204,22,0.32),transparent_26%),radial-gradient(circle_at_92%_96%,rgba(34,197,94,0.30),transparent_32%),linear-gradient(180deg,#05070b_0%,#020403_100%)]" />
+    <motion.div
+      className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_10%_6%,rgba(149,215,174,0.14),transparent_28%),radial-gradient(circle_at_92%_92%,rgba(252,239,249,0.1),transparent_34%),linear-gradient(180deg,#454851_0%,#3c4049_100%)]"
+      animate={
+        reduceMotion
+          ? undefined
+          : {
+              opacity: [0.9, 1, 0.94],
+              backgroundPosition: ['0% 0%', '8% 4%', '0% 0%'],
+            }
+      }
+      transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
+    />
+  )
+}
+
+function ScrollProgress() {
+  const reduceMotion = useReducedMotion()
+  const { scrollYProgress } = useScroll()
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 140,
+    damping: 30,
+    mass: 0.35,
+    restDelta: 0.001,
+  })
+
+  if (reduceMotion) {
+    return null
+  }
+
+  return (
+    <motion.div
+      className="pointer-events-none fixed left-0 right-0 top-0 z-[60] h-1 origin-left"
+      style={{
+        scaleX,
+        background: 'linear-gradient(90deg, #95d7ae 0%, #7bae7f 54%, #fceff9 100%)',
+      }}
+    />
   )
 }
 
@@ -81,23 +120,24 @@ function ShowcasePage({ selectedSlug, onBackHome, onSelectProject }: ShowcasePag
   const selectedProject = useMemo(() => getProjectBySlug(selectedSlug), [selectedSlug])
 
   return (
-    <main className="relative min-h-screen bg-[#05070b] text-zinc-100">
+    <main className="relative min-h-screen bg-charcoal text-lavender-blush">
       <AppBackground />
+      <ScrollProgress />
       <div className="relative mx-auto max-w-[1240px] px-3 pb-6 pt-3 sm:px-5 sm:pb-8 sm:pt-4 lg:px-6">
         <header className="sticky top-3 z-30">
-          <div className="rounded-2xl border border-white/10 bg-black/70 px-3 py-3 shadow-[0_14px_30px_rgba(0,0,0,0.35)] backdrop-blur sm:px-5 sm:py-4">
+          <div className="rounded-2xl border border-lavender-blush/10 bg-charcoal/90 px-3 py-3 shadow-[0_14px_30px_rgba(3,7,18,0.35)] backdrop-blur sm:px-5 sm:py-4">
             <nav className="flex items-center justify-between gap-3">
               <a
                 href="/"
                 onClick={onBackHome}
-                className="font-display text-lg font-semibold uppercase tracking-wide text-white sm:text-xl"
+                className="font-display text-lg font-semibold uppercase tracking-wide text-lavender-blush sm:text-xl"
               >
                 ALIFPORTFOLIO
               </a>
               <a
                 href="/"
                 onClick={onBackHome}
-                className="rounded-lg px-2 py-2 text-[0.68rem] font-medium uppercase tracking-[0.12em] text-zinc-300 transition hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-300/80 sm:px-3 sm:text-sm"
+                className="rounded-lg px-2 py-2 text-[0.68rem] font-medium uppercase tracking-[0.12em] text-lavender-blush/75 transition hover:bg-celadon/15 hover:text-lavender-blush focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-celadon/80 sm:px-3 sm:text-sm"
               >
                 Back Home
               </a>
@@ -115,26 +155,27 @@ function ShowcasePage({ selectedSlug, onBackHome, onSelectProject }: ShowcasePag
                   key={project.slug}
                   href={getHrefFor('projects', project.slug)}
                   onClick={(event) => onSelectProject(project.slug, event)}
-                  className={`flex min-w-[178px] items-center gap-3 rounded-2xl border p-2 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-300/80 ${
+                  className={`flex min-w-[178px] items-center gap-3 rounded-2xl border p-2 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-celadon/80 ${
                     isActive
-                      ? 'border-lime-300/60 bg-lime-300/10'
-                      : 'border-white/10 bg-white/[0.03] hover:border-white/20 hover:bg-white/[0.05]'
+                      ? 'border-celadon/70 bg-celadon/15'
+                      : 'border-lavender-blush/10 bg-lavender-blush/[0.03] hover:border-celadon/35 hover:bg-lavender-blush/[0.05]'
                   }`}
                   aria-current={isActive ? 'true' : undefined}
                 >
-                  <span className="relative h-14 w-14 shrink-0 overflow-hidden rounded-xl border border-white/10 bg-black">
+                  <span className="relative h-14 w-14 shrink-0 overflow-hidden rounded-xl border border-lavender-blush/10 bg-charcoal">
                     <img
                       src={project.thumbnail}
                       alt=""
                       className="absolute inset-0 h-full w-full object-cover"
                       loading="lazy"
+                      decoding="async"
                     />
                   </span>
                   <span className="min-w-0">
-                    <span className="block truncate font-display text-sm font-semibold text-white">
+                    <span className="block truncate font-display text-sm font-semibold text-lavender-blush">
                       {project.title}
                     </span>
-                    <span className="mt-1 block truncate text-[0.68rem] uppercase tracking-[0.12em] text-zinc-400">
+                    <span className="mt-1 block truncate text-[0.68rem] uppercase tracking-[0.12em] text-sage">
                       {project.year}
                     </span>
                   </span>
@@ -145,62 +186,63 @@ function ShowcasePage({ selectedSlug, onBackHome, onSelectProject }: ShowcasePag
         </section>
 
         <section className="mt-4 grid gap-3 lg:grid-cols-12">
-          <Reveal className="order-1 lg:order-none lg:col-span-8" delay={40}>
+          <Reveal className="order-1 lg:order-none lg:col-span-8" delay={40} variant="hero" direction="left">
             <SectionCard className="flex h-full min-h-[180px] flex-col justify-between">
               <div>
-                <p className="text-sm uppercase tracking-[0.16em] text-zinc-400">{selectedProject.category}</p>
-                <h1 className="mt-4 font-display text-4xl font-semibold uppercase leading-[0.94] tracking-tight text-white sm:text-6xl">
+                <p className="text-sm uppercase tracking-[0.16em] text-sage">{selectedProject.category}</p>
+                <h1 className="mt-4 font-display text-4xl font-semibold uppercase leading-[0.94] tracking-tight text-lavender-blush sm:text-6xl">
                   {selectedProject.title}
                 </h1>
               </div>
-              <p className="mt-5 text-base italic leading-snug text-zinc-300 sm:text-lg">
+              <p className="mt-5 text-base italic leading-snug text-lavender-blush/75 sm:text-lg">
                 {selectedProject.description}
               </p>
             </SectionCard>
           </Reveal>
 
-          <Reveal className="order-3 lg:order-none lg:col-span-4" delay={70}>
+          <Reveal className="order-3 lg:order-none lg:col-span-4" delay={70} direction="right">
             <SectionCard className="h-full">
-              <p className="text-base leading-relaxed text-zinc-200">{selectedProject.summary}</p>
-              <p className="mt-5 border-t border-white/10 pt-4 text-sm uppercase tracking-[0.14em] text-zinc-400">
+              <p className="text-base leading-relaxed text-lavender-blush/75">{selectedProject.summary}</p>
+              <p className="mt-5 border-t border-lavender-blush/10 pt-4 text-sm uppercase tracking-[0.14em] text-sage">
                 {projects.length} Projects Curated
               </p>
             </SectionCard>
           </Reveal>
 
-          <Reveal className="order-2 lg:order-none lg:col-span-8" delay={100}>
+          <Reveal className="order-2 lg:order-none lg:col-span-8" delay={100} variant="media">
             <SectionCard className="relative min-h-[260px] overflow-hidden p-0 sm:min-h-[460px]" padded={false}>
               <img
                 src={selectedProject.heroImage}
                 alt={`${selectedProject.title} project preview`}
                 className="absolute inset-0 h-full w-full object-cover"
+                decoding="async"
               />
             </SectionCard>
           </Reveal>
 
           <div className="order-4 grid gap-3 lg:order-none lg:col-span-4">
-            <Reveal delay={130}>
+            <Reveal delay={130} direction="right">
               <SectionCard>
-                <p className="text-sm uppercase tracking-[0.14em] text-zinc-400">Project Info</p>
+                <p className="text-sm uppercase tracking-[0.14em] text-sage">Project Info</p>
                 <div className="mt-4 text-sm">
-                  <div className="rounded-xl border border-white/10 bg-white/[0.02] p-3">
-                    <p className="text-zinc-500">Year</p>
-                    <p className="mt-1 font-medium text-white">{selectedProject.year}</p>
+                  <div className="rounded-xl border border-lavender-blush/10 bg-lavender-blush/[0.03] p-3">
+                    <p className="text-lavender-blush/75">Year</p>
+                    <p className="mt-1 font-medium text-lavender-blush">{selectedProject.year}</p>
                   </div>
                 </div>
 
-                <div className="mt-5 border-t border-white/10 pt-4">
-                  <p className="text-sm uppercase tracking-[0.14em] text-zinc-400">Role</p>
-                  <p className="mt-3 text-base leading-relaxed text-zinc-200">{selectedProject.role}</p>
+                <div className="mt-5 border-t border-lavender-blush/10 pt-4">
+                  <p className="text-sm uppercase tracking-[0.14em] text-sage">Role</p>
+                  <p className="mt-3 text-base leading-relaxed text-lavender-blush/75">{selectedProject.role}</p>
                 </div>
 
-                <div className="mt-5 border-t border-white/10 pt-4">
-                  <p className="text-sm uppercase tracking-[0.14em] text-zinc-400">Stack</p>
+                <div className="mt-5 border-t border-lavender-blush/10 pt-4">
+                  <p className="text-sm uppercase tracking-[0.14em] text-sage">Stack</p>
                   <div className="mt-3 flex flex-wrap gap-2">
                     {selectedProject.stack.map((tool) => (
                       <span
                         key={tool}
-                        className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs font-medium text-zinc-200"
+                        className="rounded-full border border-sage/25 bg-sage/10 px-3 py-1 text-xs font-medium text-lavender-blush/75"
                       >
                         {tool}
                       </span>
@@ -209,7 +251,7 @@ function ShowcasePage({ selectedSlug, onBackHome, onSelectProject }: ShowcasePag
                 </div>
 
                 <span
-                  className="mt-5 inline-flex w-full cursor-not-allowed items-center justify-between rounded-xl border border-white/10 bg-white/[0.06] px-4 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-zinc-500"
+                  className="mt-5 inline-flex w-full cursor-not-allowed items-center justify-between rounded-xl border border-lavender-blush/10 bg-lavender-blush/[0.06] px-4 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-lavender-blush/45"
                   aria-disabled="true"
                 >
                   Visit Project
@@ -223,16 +265,16 @@ function ShowcasePage({ selectedSlug, onBackHome, onSelectProject }: ShowcasePag
         <section className="mt-4">
           <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <p className="text-sm uppercase tracking-[0.16em] text-zinc-500">Showcase</p>
-              <h2 className="font-display text-4xl font-semibold uppercase tracking-tight text-white">
+              <p className="text-sm uppercase tracking-[0.16em] text-sage">Showcase</p>
+              <h2 className="font-display text-4xl font-semibold uppercase tracking-tight text-lavender-blush">
                 More Projects
               </h2>
             </div>
-            <p className="text-sm text-zinc-400">Pick a project to preview the detail.</p>
+            <p className="text-sm text-lavender-blush/75">Pick a project to preview the detail.</p>
           </div>
           <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
             {projects.map((project, index) => (
-              <Reveal key={project.slug} delay={80 + index * 35}>
+              <Reveal key={project.slug} delay={80 + index * 35} variant="media">
                 <ProjectCard
                   project={project}
                   href={getHrefFor('projects', project.slug)}
@@ -255,72 +297,101 @@ function HomePage({
   onOpenProjects: (projectSlug: string | null, event?: ReactMouseEvent<HTMLElement>) => void
 }) {
   const featuredHighlights = useMemo(() => projects.filter((project) => project.featured).slice(0, 2), [])
+  const reduceMotion = useReducedMotion()
 
   return (
-    <main id="top" className="relative min-h-screen bg-[#05070b] text-zinc-100">
+    <main id="top" className="relative min-h-screen bg-charcoal text-lavender-blush">
       <AppBackground />
+      <ScrollProgress />
 
       <div className="relative mx-auto max-w-[1240px] px-3 pb-6 pt-3 sm:px-5 sm:pb-8 sm:pt-4 lg:px-6">
         <MainNav brand="ALIFPORTFOLIO" items={navItems} />
 
         <section className="bento-showcase mt-2 sm:mt-4">
-          <Reveal className="hero-name">
-            <SectionCard className="h-full min-h-[190px] sm:min-h-[360px]">
+          <Reveal className="hero-name" delay={80} variant="hero" direction="left">
+            <SectionCard tone="charcoal" className="h-full min-h-[190px] sm:min-h-[360px]">
               <TitleCard title={profile.name} subtitle={profile.title} />
             </SectionCard>
           </Reveal>
 
-          <Reveal className="hero-photo" delay={70}>
+          <Reveal className="hero-photo" delay={180} variant="media">
             <SectionCard className="relative h-full min-h-[430px] overflow-hidden p-0 sm:min-h-[520px] lg:min-h-0">
               <img
                 src={profile.avatar}
                 alt={`Portrait of ${profile.name}`}
                 className="hero-avatar-image absolute inset-0 h-full w-full"
+                decoding="async"
               />
             </SectionCard>
           </Reveal>
 
-          <Reveal className="hero-exp" delay={90}>
+          <Reveal className="hero-exp" delay={260} direction="right">
             <SectionCard className="h-full min-h-[380px] lg:min-h-0">
               <ExperienceList items={experiences} />
             </SectionCard>
           </Reveal>
 
-          <Reveal className="hero-about" delay={120}>
-            <SectionCard id="about" className="h-full p-5 sm:p-6">
-              <InfoCard heading="About" body={profile.bio} />
+          <Reveal className="hero-about" delay={320} variant="soft">
+            <SectionCard id="about" tone="lavender" className="h-full p-5 sm:p-6">
+              <InfoCard heading="About" body={profile.bio} tone="light" />
             </SectionCard>
           </Reveal>
 
-          <Reveal className="hero-mail" delay={150}>
-            <SectionCard className="group h-full p-5 sm:p-6">
-              <a
+          <Reveal className="hero-mail" delay={360} variant="soft">
+            <SectionCard tone="celadon" className="group h-full p-5 sm:p-6">
+              <motion.a
                 href="mailto:alif.saifuddin79@gmail.com"
-                className="flex h-full flex-col justify-between rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-300/80"
+                aria-label="Send an email to Alif Syaifuddin"
+                className="flex h-full flex-col justify-between rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-charcoal/50"
+                initial="rest"
+                whileHover={reduceMotion ? undefined : 'hover'}
+                whileTap={reduceMotion ? undefined : { scale: 0.985 }}
+                variants={{
+                  rest: { y: 0 },
+                  hover: { y: -3 },
+                }}
+                transition={{ type: 'spring', stiffness: 300, damping: 26 }}
               >
-                <p className="text-base leading-snug text-zinc-400 sm:text-lg">Wanna get in touch?</p>
+                <p className="text-base leading-snug text-charcoal/70 sm:text-lg">Wanna get in touch?</p>
                 <div className="flex items-end justify-between gap-2">
-                  <p className="font-display text-4xl font-semibold uppercase leading-[0.9] tracking-tight text-white sm:text-[2.9rem] xl:text-[3.15rem]">
+                  <p className="font-display text-4xl font-semibold uppercase leading-[0.9] tracking-tight text-charcoal sm:text-[2.9rem] xl:text-[3.15rem]">
                     <span className="block">Email</span>
                     <span className="block">Me</span>
                   </p>
-                  <span className="pb-1 text-4xl text-zinc-200 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
+                  <motion.span
+                    className="pb-1 text-4xl text-charcoal"
+                    variants={{
+                      rest: { x: 0, y: 0 },
+                      hover: { x: 6, y: -6, color: '#fceff9' },
+                    }}
+                    transition={{ type: 'spring', stiffness: 360, damping: 22 }}
+                  >
                     ↗
-                  </span>
+                  </motion.span>
                 </div>
-              </a>
+              </motion.a>
             </SectionCard>
           </Reveal>
-          <Reveal className="featured-title" delay={60}>
-            <SectionCard id="work" className="h-full px-7 py-6">
-              <h2 className="font-display text-4xl font-semibold uppercase tracking-tight text-white sm:text-6xl lg:text-5xl">
+          <Reveal className="featured-title" delay={120} variant="hero" direction="left">
+            <SectionCard
+              id="work"
+              tone="sage"
+              className="h-full px-7 py-6"
+            >
+              <h2 className="font-display text-4xl font-semibold uppercase tracking-tight text-lavender-blush sm:text-6xl lg:text-5xl">
                 Featured Work
               </h2>
             </SectionCard>
           </Reveal>
 
           {featuredHighlights.map((project, index) => (
-            <Reveal key={project.title} className={`featured-card-${index + 1}`} delay={100 + index * 40}>
+            <Reveal
+              key={project.title}
+              className={`featured-card-${index + 1}`}
+              delay={100 + index * 40}
+              variant="media"
+              direction={index === 0 ? 'left' : 'up'}
+            >
               <ProjectCard
                 project={project}
                 href={getHrefFor('projects', project.slug)}
@@ -331,40 +402,56 @@ function HomePage({
             </Reveal>
           ))}
 
-          <Reveal className="featured-more" delay={180}>
-            <SectionCard className="featured-more-card">
-              <a
+          <Reveal className="featured-more" delay={280} direction="right">
+            <SectionCard tone="mutedTeal" className="featured-more-card">
+              <motion.a
                 href={getHrefFor('projects')}
                 onClick={(event) => onOpenProjects(null, event)}
-                className="group flex h-full flex-col justify-between rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-300/80"
+                aria-label="Open all portfolio projects"
+                className="group flex h-full flex-col justify-between rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-charcoal/50"
+                initial="rest"
+                whileHover={reduceMotion ? undefined : 'hover'}
+                whileTap={reduceMotion ? undefined : { scale: 0.985 }}
+                variants={{
+                  rest: { y: 0 },
+                  hover: { y: -3 },
+                }}
+                transition={{ type: 'spring', stiffness: 300, damping: 26 }}
               >
                 <div>
-                  <p className="text-sm uppercase tracking-[0.14em] text-zinc-400">Showcase</p>
-                  <h3 className="mt-3 font-display text-3xl font-semibold uppercase leading-[0.92] tracking-tight text-white sm:text-4xl">
+                  <p className="text-sm uppercase tracking-[0.14em] text-charcoal/70">Showcase</p>
+                  <h3 className="mt-3 font-display text-3xl font-semibold uppercase leading-[0.92] tracking-tight text-charcoal sm:text-4xl">
                     More Projects
                   </h3>
                 </div>
                 <div className="flex items-end justify-between gap-3">
-                  <p className="text-sm text-zinc-300">{projects.length}+ projects done</p>
-                  <span className="text-3xl text-zinc-200 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
+                  <p className="text-sm text-charcoal/75">{projects.length}+ projects done</p>
+                  <motion.span
+                    className="text-3xl text-charcoal"
+                    variants={{
+                      rest: { x: 0, y: 0 },
+                      hover: { x: 6, y: -6, color: '#fceff9' },
+                    }}
+                    transition={{ type: 'spring', stiffness: 360, damping: 22 }}
+                  >
                     ↗
-                  </span>
+                  </motion.span>
                 </div>
-              </a>
+              </motion.a>
             </SectionCard>
           </Reveal>
 
-          <Reveal className="mid-expertise" delay={120}>
+          <Reveal className="mid-expertise" delay={120} direction="right">
             <SectionCard className="h-full">
               <section>
-                <h2 className="font-display text-3xl font-semibold uppercase tracking-tight text-white sm:text-4xl">
+                <h2 className="font-display text-3xl font-semibold uppercase tracking-tight text-lavender-blush sm:text-4xl">
                   Expertise
                 </h2>
                 <div className="mt-4 space-y-4">
                   {expertise.map((item) => (
-                    <article key={item.title} className="border-t border-white/10 pt-3">
-                      <h3 className="text-2xl font-medium text-white">{item.title}</h3>
-                      <p className="mt-1 text-sm leading-relaxed text-zinc-300">{item.description}</p>
+                    <article key={item.title} className="border-t border-lavender-blush/10 pt-3">
+                      <h3 className="text-2xl font-medium text-lavender-blush">{item.title}</h3>
+                      <p className="mt-1 text-sm leading-relaxed text-lavender-blush/75">{item.description}</p>
                     </article>
                   ))}
                 </div>
@@ -372,9 +459,9 @@ function HomePage({
             </SectionCard>
           </Reveal>
 
-          <Reveal className="mid-toolbox" delay={70}>
+          <Reveal className="mid-toolbox" delay={70} variant="soft">
             <SectionCard className="h-full">
-              <h2 className="font-display text-3xl font-semibold uppercase tracking-tight text-white sm:text-4xl">Toolbox</h2>
+              <h2 className="font-display text-3xl font-semibold uppercase tracking-tight text-lavender-blush sm:text-4xl">Toolbox</h2>
               <div className="toolbox-marquee mt-4">
                 <div className="toolbox-track">
                   {[...toolbox, ...toolbox].map((tool, index) => (
@@ -385,19 +472,20 @@ function HomePage({
                       aria-label={index < toolbox.length ? tool.name : undefined}
                       title={tool.name}
                     >
-                      <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04]">
+                      <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl border border-lavender-blush/10 bg-lavender-blush/[0.04]">
                         <img
                           src={`https://cdn.simpleicons.org/${tool.slug}`}
                           alt={`${tool.name} logo`}
                           className="h-7 w-7 object-contain"
                           loading="lazy"
+                          decoding="async"
                           onError={(event) => {
                             event.currentTarget.style.display = 'none'
                             const fallback = event.currentTarget.nextElementSibling as HTMLSpanElement | null
                             if (fallback) fallback.style.display = 'block'
                           }}
                         />
-                        <span className="hidden text-sm font-semibold text-zinc-200" aria-hidden="true">
+                        <span className="hidden text-sm font-semibold text-lavender-blush" aria-hidden="true">
                           {tool.short}
                         </span>
                       </div>
@@ -408,29 +496,29 @@ function HomePage({
             </SectionCard>
           </Reveal>
 
-          <Reveal className="mid-motivation" delay={90}>
+          <Reveal className="mid-motivation" delay={90} direction="left">
             <SectionCard className="h-full">
               <section>
-                <h2 className="font-display text-3xl font-semibold uppercase tracking-tight text-white sm:text-4xl">
+                <h2 className="font-display text-3xl font-semibold uppercase tracking-tight text-lavender-blush sm:text-4xl">
                   Motivation
                 </h2>
                 <div className="mt-5 space-y-4">
-                  <p className="border-t border-white/10 pt-4 text-base leading-relaxed text-zinc-300">
+                  <p className="border-t border-lavender-blush/10 pt-4 text-base leading-relaxed text-lavender-blush/75">
                     Driven by meaningful product outcomes, not trends. I focus on creating interfaces
                     that feel premium, fast, and clear while solving real user goals.
                   </p>
-                  <p className="text-sm uppercase tracking-[0.14em] text-zinc-400">{profile.location}</p>
-                  <p className="font-signature pt-2 text-3xl text-zinc-100 sm:text-4xl">{profile.signature}</p>
+                  <p className="text-sm uppercase tracking-[0.14em] text-sage">{profile.location}</p>
+                  <p className="font-signature pt-2 text-3xl text-lavender-blush sm:text-4xl">{profile.signature}</p>
                 </div>
               </section>
             </SectionCard>
           </Reveal>
 
-          <Reveal className="mid-contact" delay={140}>
+          <Reveal className="mid-contact" delay={140} direction="right">
             <SectionCard id="contact" className="h-full">
-              <div className="mb-5 rounded-xl border border-white/10 bg-white/[0.02] px-4 py-3">
-                <p className="flex items-center gap-3 text-base font-medium text-zinc-100 sm:text-lg">
-                  <span className="inline-block h-2.5 w-2.5 rounded-full bg-lime-400 shadow-[0_0_12px_rgba(163,230,53,0.75)]" />
+              <div className="mb-5 rounded-xl border border-lavender-blush/10 bg-lavender-blush/[0.03] px-4 py-3">
+                <p className="flex items-center gap-3 text-base font-medium text-lavender-blush sm:text-lg">
+                  <span className="inline-block h-2.5 w-2.5 rounded-full bg-celadon shadow-[0_0_12px_rgba(149,215,174,0.75)]" />
                   {profile.availability}
                 </p>
               </div>
@@ -439,9 +527,9 @@ function HomePage({
           </Reveal>
         </section>
 
-        <Reveal className="mt-4" delay={140}>
+        <Reveal className="mt-4" delay={140} variant="soft">
           <SectionCard className="flex flex-col gap-4 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-sm text-zinc-300">
+            <p className="text-sm text-lavender-blush/75">
               © {new Date().getFullYear()} {profile.name}. Designed & built with React and Tailwind.
             </p>
             <SocialButtons items={socials} />
