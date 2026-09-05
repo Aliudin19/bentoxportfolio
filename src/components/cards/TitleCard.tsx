@@ -1,63 +1,44 @@
 import { motion, useReducedMotion } from 'motion/react'
+import { motionTiming } from '../../lib/motion'
 
-import { cn } from '../../lib/cn'
-
-interface TitleCardProps {
+export function TitleCard({
+  title,
+  subtitle,
+}: {
   title: string
   subtitle?: string
-  className?: string
-}
-
-export function TitleCard({ title, subtitle, className }: TitleCardProps) {
-  const words = title.split(' ')
-  const reduceMotion = useReducedMotion()
-
+}) {
+  const reduced = useReducedMotion()
   return (
-    <div className={cn('flex h-full flex-col justify-between gap-4', className)}>
-      {subtitle ? (
-        <motion.p
-          className="text-[0.72rem] font-medium uppercase tracking-[0.16em] text-celadon"
-          initial={reduceMotion ? false : { opacity: 0, y: 10 }}
-          animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-          transition={{ delay: 0.18, duration: 0.62, ease: [0.16, 1, 0.3, 1] }}
-        >
-          {subtitle}
-        </motion.p>
-      ) : null}
-      <motion.h1
-        className="max-w-full font-display text-[clamp(2.45rem,11vw,3.3rem)] font-semibold uppercase leading-[0.9] text-lavender-blush sm:text-[clamp(3rem,5.2vw,3.85rem)] sm:leading-[0.94] xl:text-[3.75rem]"
-        initial={reduceMotion ? false : 'hidden'}
-        animate={reduceMotion ? undefined : 'visible'}
-        variants={{
-          hidden: {},
-          visible: {
-            transition: {
-              delayChildren: 0.34,
-              staggerChildren: 0.16,
-            },
-          },
-        }}
+    <>
+      <p className="eyebrow">{subtitle}</p>
+      <h1
+        className="hero-name"
+        tabIndex={-1}
+        data-page-heading
+        aria-label={title}
       >
-        {words.map((word, index) => (
-          <motion.span
+        {title.split(' ').map((word, index) => (
+          <span
+            className="name-mask"
             key={`${word}-${index}`}
-            className="block max-w-full whitespace-nowrap"
-            variants={{
-              hidden: { opacity: 0, y: 34, scale: 0.96, filter: 'blur(8px)' },
-              visible: {
-                opacity: 1,
-                y: 0,
-                scale: 1,
-                filter: 'blur(0px)',
-                transition: { duration: 0.78, ease: [0.16, 1, 0.3, 1] },
-              },
-            }}
+            aria-hidden="true"
           >
-            {word}
-            {index < words.length - 1 ? <span className="sr-only"> </span> : null}
-          </motion.span>
+            <motion.span
+              className="name-line"
+              initial={reduced ? false : { y: '110%', rotate: 4 }}
+              animate={{ y: '0%', rotate: 0 }}
+              transition={{
+                duration: reduced ? 0 : motionTiming.hero,
+                delay: reduced ? 0 : 0.12 + index * 0.14,
+                ease: motionTiming.ease,
+              }}
+            >
+              {word}
+            </motion.span>
+          </span>
         ))}
-      </motion.h1>
-    </div>
+      </h1>
+    </>
   )
 }

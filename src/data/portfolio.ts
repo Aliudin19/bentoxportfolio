@@ -5,7 +5,6 @@ import type {
   ProfileData,
   ProjectItem,
   SocialLink,
-  TestimonialItem,
 } from '../types/portfolio'
 
 export const navItems: NavItem[] = [
@@ -16,13 +15,13 @@ export const navItems: NavItem[] = [
 
 export const profile: ProfileData = {
   name: 'Alif Syaifuddin',
-  title: 'Full-stack developer & UI/UX designer',
+  title: 'Full-stack developer',
+  email: 'alif.saifuddin79@gmail.com',
   location: 'Jakarta / Remote',
-  intro: 'Crafting digital experiences with a blend of design and code.',
-  bio: "I design and build modern system experiences that feel fast, clear, and memorable. My approach blends visual direction, practical UX, and production-ready full-stack engineering.",
-  availability: 'Available for freelance projects',
-  avatar: '/images/alif-2.1.png',
-  signature: 'Alif Syaifuddin',
+  intro:
+    'I build business applications, from supply chain platforms to learning systems.',
+  bio: 'Based in Jakarta, I work across front-end interfaces and back-end APIs. My experience includes B2B supply chain software, corporate learning systems, and eSIM services.',
+  avatar: '/images/alif-portrait-960.webp',
 }
 
 export const experiences: ExperienceItem[] = [
@@ -40,7 +39,7 @@ export const experiences: ExperienceItem[] = [
     period: 'Jun 2024 - Jun 2025',
     location: 'Jakarta',
     highlights:
-      'Translated product requirements into high-fidelity prototypes and implemented polished UI implementations, with a focus on conversion and usability.',
+      'Translated product requirements into high-fidelity prototypes and implemented the front-end interfaces.',
   },
   {
     role: 'Software Test Engineer',
@@ -54,38 +53,60 @@ export const experiences: ExperienceItem[] = [
 
 export const expertise: ExpertiseItem[] = [
   {
-    title: 'Full-stack Development',
-    description:
-      'Proficient in both front-end and back-end technologies, delivering end-to-end solutions that are performant, scalable, and maintainable.',
+    title: 'Front-end',
+    description: 'Product interfaces built with Angular, React, and Vue.',
   },
   {
-    title: 'Web / App Design',
+    title: 'Back-end',
     description:
-      'Design systems and product interfaces that balance brand expression with usability and speed.',
+      'API implementation with Spring Boot and Go Fiber, using PostgreSQL.',
   },
   {
-    title: 'Software Testing',
+    title: 'Quality',
     description:
-      'Experienced in manual and automated testing methodologies, ensuring software quality and reliability through comprehensive test plans and execution.',
+      'Manual testing, automated test suites, and bug documentation.',
   },
+]
+
+export const technologies = [
+  { name: 'Angular', icon: 'angular', color: '#F34B7D' },
+  { name: 'React', icon: 'react', color: '#61DAFB' },
+  { name: 'Vue', icon: 'vuejs', color: '#42B883' },
+  { name: 'TypeScript', icon: 'typescript', color: '#5599E3' },
+  { name: 'Tailwind CSS', icon: 'tailwindcss', color: '#38BDF8' },
+  { name: 'Spring Boot', icon: 'spring', color: '#8AC653' },
+  { name: 'Go Fiber', icon: 'go', color: '#00ADD8' },
+  { name: 'PostgreSQL', icon: 'postgresql', color: '#75A4CB' },
+  { name: 'Docker', icon: 'docker', color: '#2496ED' },
+  { name: 'Git', icon: 'git', color: '#F57760' },
+  { name: 'Postman', icon: 'postman', color: '#FF8A65' },
+  { name: 'SonarQube', icon: 'sonarqube', color: '#72B7DC' },
 ]
 
 export const projects: ProjectItem[] = [
   {
     slug: 'learning-management-system',
     title: 'Learning Management System',
-    thumbnail: '/images/LMS-capture.png',
-    heroImage: '/images/LMS-capture.png',
-    link: 'https://example.com/celestia',
+    thumbnail: '/images/lms-1920.webp',
+    heroImage: '/images/lms-1920.webp',
+    gallery: [
+      {
+        src: '/images/lms-1920.webp',
+        alt: 'LMS dashboard showing learning assignments and course recommendations',
+        caption:
+          'Learning dashboard — assignments, required courses, and recommendations.',
+      },
+    ],
     category: 'Learning System',
     tags: ['Curriculum', 'Lecture Notes', 'PostgreSQL', 'Learning Management'],
     stack: ['Vue', 'Tailwind CSS', 'Spring Boot', 'PostgreSQL', 'SonarQube'],
-    description: 'A comprehensive LMS platform for corporate training and development.',
+    description:
+      'Course delivery, assignments, and learning materials for corporate training.',
     summary:
-      'A full-featured learning management system designed to facilitate corporate training and development, with a focus on user engagement, content management, and performance tracking.',
-    impact: 'Simplified course delivery, assignment flow, and learning material access for internal training teams.',
+      'A corporate learning platform for organizing training content and tracking learning progress.',
+    impact:
+      'Simplified course delivery, assignment flow, and learning material access for internal training teams.',
     focus: ['Course structure', 'Assignment workflow', 'Admin reporting'],
-    metric: 'End-to-end learning workflow',
     role: 'UI design, front-end development, and back-end API implementation.',
     year: '2026',
     featured: true,
@@ -93,95 +114,37 @@ export const projects: ProjectItem[] = [
   {
     slug: 'konectgo',
     title: 'KonectGo',
-    thumbnail: '/images/konectgo-capture.png',
-    heroImage: '/images/konectgo-capture.png',
-    link: 'https://example.com/konectgo',
+    thumbnail: '/images/konectgo-1920.webp',
+    heroImage: '/images/konectgo-1920.webp',
+    gallery: [
+      {
+        src: '/images/konectgo-1920.webp',
+        alt: 'KonectGo homepage with destination search and data packages',
+        caption:
+          'Service homepage — destination search and popular data packages.',
+      },
+    ],
     category: 'eSIM & Simcard Services',
     tags: ['Simcard', 'eSIM', 'Quota Roaming'],
-    stack: ['React', 'Go Fiber', 'Responsive Layout', 'Editorial UI'],
-    description: 'Platform for eSIM and simcard services, seamless and user-friendly.',
+    stack: ['React', 'Go Fiber'],
+    description:
+      'A platform for discovering eSIM, SIM card, and roaming data services.',
     summary:
-      'A dynamic platform for esim and simcard services, featuring a user-friendly design and seamless interactions to enhance customer experience and drive engagement.',
-    impact: 'Created a clearer purchase journey for roaming quota, simcard, and eSIM service discovery.',
+      'An eSIM and SIM card service platform with destination browsing and a purchase journey for roaming data packages.',
+    impact:
+      'Created a clearer purchase journey for roaming quota, simcard, and eSIM service discovery.',
     focus: ['Catalog browsing', 'Checkout clarity', 'Service management'],
-    metric: 'Mobile-first telecom flow',
     role: 'Back-end development, front-end implementation, and product management.',
     year: '2025',
     featured: true,
-  },
-  // {
-  //   slug: 'frameflow-portfolio',
-  //   title: 'Frameflow Portfolio',
-  //   thumbnail: '/images/project-frameflow.svg',
-  //   heroImage: '/images/project-frameflow.svg',
-  //   link: 'https://example.com/frameflow',
-  //   category: 'Personal Brand System',
-  //   tags: ['TypeScript', 'UI System'],
-  //   stack: ['TypeScript', 'Vue', 'Design System', 'Bento Layout'],
-  //   description: 'Personal brand platform with modular bento sections.',
-  //   summary:
-  //     'A modular portfolio system built around reusable bento sections, compact storytelling, and easy content updates.',
-  //   role: 'Design system planning, component architecture, and production front-end build.',
-  //   year: '2024',
-  //   featured: true,
-  // },
-  // {
-  //   slug: 'Project Management Dashboard',
-  //   title: 'Project Management Dashboard',
-  //   thumbnail: '/images/dashboard-capture.png',
-  //   heroImage: '/images/dashboard-capture.png',
-  //   link: 'https://example.com/dashboard',
-  //   category: 'Project Management Tool',
-  //   tags: ['React', 'Node.js', 'MongoDB', 'Project Management'],
-  //   stack: ['React', 'Node.js', 'MongoDB', 'Express', 'JWT Authentication'],
-  //   description:
-  //     'A project management dashboard for teams to track tasks, deadlines, and collaboration.',
-  //   summary:
-  //     'A comprehensive project management tool designed to help teams organize tasks, manage deadlines, and facilitate collaboration through an intuitive interface and robust feature set.',
-  //   role: 'Full-stack development, including front-end design and back-end API implementation.',
-  //   year: '2025',
-  //   featured: false,
-  // }
-]
-
-export const testimonials: TestimonialItem[] = [
-  {
-    name: 'David Rodriguez',
-    role: 'Creative Director',
-    company: 'Xbox',
-    quote:
-      'Alif combines design taste and engineering discipline. The final product looked premium and stayed performant.',
-    logo: 'XBX',
-  },
-  {
-    name: 'Jessica Parker',
-    role: 'Marketing Manager',
-    company: 'Activision',
-    quote:
-      'The collaboration was smooth and transparent. We launched with strong feedback from both users and stakeholders.',
-    logo: 'ATV',
-  },
-  {
-    name: 'James Connor',
-    role: 'Project Lead',
-    company: 'Airbus',
-    quote:
-      'Strong ownership from planning to handoff. Every milestone was delivered with clarity and excellent attention to detail.',
-    logo: 'ARB',
-  },
-  {
-    name: 'Emily Carter',
-    role: 'Head of Product',
-    company: 'Notion Labs',
-    quote:
-      'Design decisions were always grounded in user flow. The final interface feels both elegant and practical.',
-    logo: 'NTS',
   },
 ]
 
 export const socials: SocialLink[] = [
   { platform: 'github', url: 'https://github.com/Aliudin19' },
-  { platform: 'linkedin', url: 'https://www.linkedin.com/in/alif-syaifuddin-798970275' },
+  {
+    platform: 'linkedin',
+    url: 'https://www.linkedin.com/in/alif-syaifuddin-798970275',
+  },
   { platform: 'instagram', url: 'https://www.instagram.com/alixudin/' },
-  { platform: 'x', url: 'https://x.com' },
 ]

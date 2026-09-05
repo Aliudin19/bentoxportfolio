@@ -8,12 +8,11 @@ export interface NavItem {
 export interface ProfileData {
   name: string
   title: string
+  email: string
   location: string
   intro: string
   bio: string
-  availability: string
   avatar: string
-  signature: string
 }
 
 export interface ExperienceItem {
@@ -29,7 +28,8 @@ export interface ProjectItem {
   title: string
   thumbnail: string
   heroImage: string
-  link: string
+  gallery?: { src: string; alt: string; caption: string }[]
+  link?: string
   category: string
   tags: string[]
   stack: string[]
@@ -37,7 +37,6 @@ export interface ProjectItem {
   summary: string
   impact: string
   focus: string[]
-  metric: string
   role: string
   year: string
   featured: boolean
@@ -48,21 +47,7 @@ export interface ExpertiseItem {
   description: string
 }
 
-export interface TestimonialItem {
-  name: string
-  role: string
-  company: string
-  quote: string
-  logo: string
-}
-
 export interface SocialLink {
   platform: 'github' | 'linkedin' | 'instagram' | 'x'
   url: string
-}
-
-export interface ContactFormInput {
-  name: string
-  email: string
-  message: string
 }

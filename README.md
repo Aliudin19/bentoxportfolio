@@ -1,112 +1,34 @@
-# Alif Bento Portfolio
+# Alif’s portfolio
 
-Bento-style personal portfolio for showcasing selected projects, professional experience, expertise, tools, and contact information.
+A React + TypeScript portfolio for full-stack work. An open, typographic introduction leads into project overviews, professional experience, technologies, and direct contact links.
 
-## Overview
+## Development
 
-This portfolio is built as a responsive single-page React app with a lightweight in-app showcase view. The homepage presents a compact bento layout, while the project showcase page provides a focused detail view and mobile-friendly project selector.
-
-## Features
-
-- Responsive bento layout for desktop and mobile
-- Featured project cards with showcase navigation
-- Project detail/showcase view using URL query params
-- Mobile project selector for quick project switching
-- Animated reveal effects on scroll
-- Toolbox marquee with icon-only tool tiles
-- Contact form prepared for Formspree integration
-- Social links and email CTA
-
-## Tech Stack
-
-- React
-- TypeScript
-- Vite
-- Tailwind CSS
-- ESLint
-
-## Getting Started
-
-Install dependencies:
-
-```bash
-npm install
-```
-
-Start the development server:
-
-```bash
+```sh
+npm ci
 npm run dev
 ```
 
-Build for production:
-
-```bash
+```sh
 npm run build
-```
-
-Run lint checks:
-
-```bash
 npm run lint
-```
-
-Preview the production build:
-
-```bash
 npm run preview
 ```
 
-## Environment Variables
+## Content
 
-The contact form is prepared for Formspree. Create a `.env` file based on `.env.example`:
+Edit `src/data/portfolio.ts` for profile information, email, experience, capabilities, and projects. Only use verified contributions and outcomes. Project links are optional; omit unavailable destinations. Screenshots can have a gallery with source, alt text, and caption.
 
-```env
-VITE_FORMSPREE_ENDPOINT=https://formspree.io/f/your-form-id
-```
+Project URLs use `?page=projects&project=<slug>`. The project page without a slug shows the first project; unknown slugs display a project selection. No environment variables or contact service are required. Email, LinkedIn, and GitHub provide direct contact.
 
-If the endpoint is not configured, the form will show an error when submitted.
+## Assets and motion
 
-## Content Management
+Original photographs and screenshots are preserved in `public/images`. Responsive WebP variants are used by the app. Project variants use `-800.webp` and `-1920.webp` naming; the latter preserves the original capture resolution. Keep readable screenshots and descriptive alternative text when updating images.
 
-Most portfolio content lives in:
-
-```text
-src/data/portfolio.ts
-```
-
-Update this file to change:
-
-- Profile information
-- Experience items
-- Expertise items
-- Project showcase data
-- Social links
-
-Project images are stored in:
-
-```text
-public/images/
-```
-
-## Project Links
-
-The showcase detail button is currently disabled and shown as `Visit Project Soon`. Enable it again after live project or repository links are ready.
+Animation timing is centralized in `src/lib/motion.ts`; CSS interaction transitions use the same 180ms duration. Motion respects reduced-motion preferences, and scrolling remains native. Screenshot enlargement uses a native modal dialog with keyboard support.
 
 ## Deployment
 
-This app can be deployed to Vercel, Netlify, GitHub Pages, or any static hosting provider that supports Vite builds.
+Build output is in `dist/` and can be served by a static host. Before publishing, replace the relative `og:image` URL in `index.html` with the deployed absolute URL and add `og:url` once the production domain is known. The local social preview is `public/images/social-preview.png`.
 
-Production build output is generated in:
-
-```text
-dist/
-```
-
-The `dist/` directory is ignored by Git because it can be rebuilt from source.
-
-## Notes
-
-- Keep `.env` private and do not commit it.
-- Use `.env.example` to document required environment variables.
-- Replace placeholder project links before enabling external project buttons.
+Technology icons are served locally from `public/icons/technologies`, sourced from Devicon v2.17.0 (MIT; license included in that directory). Go Fiber uses the Go language mark. The technology strip runs continuously, including on hover, and becomes a static list with reduced motion. GitHub and LinkedIn contact buttons retain visible names alongside their icons and brand colors.
